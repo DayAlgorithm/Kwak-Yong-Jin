@@ -23,6 +23,7 @@ for _ in range(t):
             dis = abs((node2[0] - node1[0])) + abs((node2[1] - node1[1])) # 연결 가능한 노드끼리 저장
             if dis <= 1000:
                 graph[node1].append(node2)
+                graph[node2].append(node1)
                 
     visited = set()
     queue = deque()
