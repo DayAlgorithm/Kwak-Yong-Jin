@@ -1,0 +1,29 @@
+import sys
+from collections import deque
+input = sys.stdin.readline
+
+n, m = map(int, input().split())
+parents = list(map(int, input().split()))
+
+children = [[] for _ in range(n + 1)]
+root = 0
+
+for emp, p in enumerate(parents, start=1):
+    if p == -1:
+        root = emp
+    else:
+        children[p].append(emp)
+
+praise = [0] * (n + 1)
+for _ in range(m):
+    i, w = map(int, input().split())
+    praise[i] += w
+
+q = deque([root])
+
+while q:
+    cur = q.popleft()
+    for ch in children[cur]:
+        praise[ch] += praise[cur]
+        q.append(ch)
+print(*praise[1:])
